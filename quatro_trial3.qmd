@@ -1,0 +1,73 @@
+---
+title: "quatro_trial"
+format: 
+  revealjs:
+    controls: true
+    navigation-mode: linear
+    self-contained: true
+lang: ja
+---
+
+## Quarto
+
+Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
+
+```{r}
+library(flextable)
+library(magrittr)
+library(dplyr)
+1 + 1
+```
+
+```{r}
+#| label: fig-airquality
+#| fig-cap: "Temperature and ozone level. 図"
+#| warning: false
+
+library(ggplot2)
+
+ggplot(airquality, aes(Temp, Ozone)) + 
+  geom_point() + 
+  geom_smooth(method = "loess")
+```
+
+## Quarto Demo
+
+- `r paste("aa", nrow(airquality))` - なんなんだこれは！ここから出せー!!お
+- 生きているのもなかなか
+
+```{r}
+#| label: fig-airquality3
+#| fig-cap: !expr nrow(airquality)
+#| warning: false
+
+library(ggplot2)
+
+ggplot(airquality, aes(Temp, Ozone)) + 
+  geom_point() + 
+  geom_smooth(method = "loess")
+```
+
+## Table test
+
+```{r}
+#| label: tbl-md
+#| tbl-cap: "$\\beta$~1~"
+knitr::kable(data.frame(x = rnorm(5)))
+  
+```
+
+
+## flex Table test
+
+```{r}
+knitr::opts_chunk$set("ft.shadow" = FALSE)
+df1 = data.frame(x = rnorm(5), 
+                 y = rnorm(5))
+
+
+df1 %>% flextable() %>% 
+  bold(part = "header") %>% set_caption("my caption")
+
+```
+
